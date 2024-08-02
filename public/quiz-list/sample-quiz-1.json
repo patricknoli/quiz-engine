@@ -1,0 +1,60 @@
+{
+  "quiz_name": "Sample 1",
+  "quiz_description": "This is a simple quiz example with a couple of questions",
+  "questions": [
+    {
+      "question_id": 1,
+      "question_title": "A math question!",
+      "question_description": "Are you good at math?",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "Is 4 a odd number?",
+      "question_type": "one-choice",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_text": "Yes"
+        },
+        {
+          "answer_id": 2,
+          "answer_text": "No"
+        },
+        {
+          "answer_id": 3,
+          "answer_text": "Maybe"
+        }
+      ]
+    },
+    {
+      "question_id": 2,
+      "question_title": "Tell me about your location",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "What is your city?",
+      "question_type": "input"
+    },
+    {
+      "question_id": 3,
+      "question_title": "Do you like to travel?",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "What countries would you like to go to?",
+      "question_type": "multiple-choice",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_text": "Brazil"
+        },
+        {
+          "answer_id": 2,
+          "answer_text": "Australia"
+        },
+        {
+          "answer_id": 3,
+          "answer_text": "Germany"
+        },
+        {
+          "answer_id": 4,
+          "answer_text": "China"
+        }
+      ]
+    }
+  ]
+}
