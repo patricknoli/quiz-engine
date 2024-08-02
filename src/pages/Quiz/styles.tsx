@@ -47,6 +47,7 @@ export const QuestionBox = styled.div`
   img.question-image {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    width: 100%;
   }
 
   .question-content {
