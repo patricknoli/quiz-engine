@@ -21,24 +21,12 @@ export type AnswerType = {
   answer_text: string;
 }
 
-// "quiz_name": "Sample 1",
-//   "questions": [
-//     {
-//       "question_text": "Is 4 a odd number?",
-//       "question_type": "one-choice",
-//       "answers": [
-//         {
-//           "answer_text": "Yes",
-//           "answer_correct": false
-//         },
-//         {
-//           "answer_text": "No",
-//           "answer_correct": true
-//         },
-//         {
-//           "answer_text": "Maybe",
-//           "answer_correct": false
-//         }
-//       ]
-//     }
-//   ]
+export type AnsweredQuestionType = {
+  question_id: number;
+  options: [
+    {
+      answer_id?: number
+    }
+  ]
+  answer_text?: string;
+}

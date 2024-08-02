@@ -14,21 +14,21 @@ export const QuizContainer = styled.div`
     }
 
     @keyframes showQuestion {
-        0% {
-          opacity: 0;
-          transform: translateX(100%);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
       }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
-      &.current {
-        display: block;
-        animation-name: showQuestion;
-        animation-duration: .5s;
-      }
+    &.current {
+      display: block;
+      animation-name: showQuestion;
+      animation-duration: .5s;
+    }
   }
 
   .action {
@@ -61,6 +61,9 @@ export const QuestionBox = styled.div`
 
     .options-list {
       margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     input {
@@ -78,6 +81,37 @@ export const Option = styled.div`
   text-align: left;
   cursor: pointer;
   transition: .4s;
+
+  @keyframes blinkOption {
+    0% {
+      opacity: 0.5;
+    }
+    20% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 0.5;
+    }
+    60% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &.selected {
+    background-color: #646cff;
+    animation-name: blinkOption;
+    animation-duration: .6s;
+
+    &:hover {
+      background-color: #646cff;
+    }
+  }
 
   &:hover {
     background-color: #464646;
