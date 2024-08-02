@@ -1,30 +1,90 @@
-# React + TypeScript + Vite
+# React Quiz Engine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application is a simple Quiz Engine built with React and Typescript
 
-Currently, two official plugins are available:
+Author: Patrick Nicacio de Oliveira
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## To run the application follow the instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1 - Clone the repository
 
-- Configure the top-level `parserOptions` property like this:
+### 2 - Install dependencies
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
+Go to app directory and run the command on terminal
+
+using npm:
+```
+npm install
+```
+or yarn
+```
+yarn
+```
+
+### 3 - Run the application locally
+
+Now start the application on localhost by running the following command
+
+```
+npm run dev
+```
+or
+```
+yarn dev
+```
+
+Now the app will be available at localhost:5173
+
+## To manage the quizzes json files
+
+### Editing an existent Quiz
+
+Go to /public/quiz-list/ select and update the quiz you want and save it.
+
+### Adding a new Quiz
+
+#### Step 1
+Add your own json file at /public/quiz-list/ directory following this type definition:
+
+```typescript
+{
+  "quiz_name": string;
+  "quiz_description"?: string;
+  "questions": [
+    {
+      "question_id": number;
+      "question_title"?: string;
+      "question_description"?: string;
+      "question_image"?: string;
+      "question_text": string;
+      "question_type": "one-choice" | "multiple-choice" | "input";
+      "answers"?: [
+        "answer_id": number;
+        "answer_text": string;
+      ];
+      "question_dependency_id"?: number;
+      "question_dependency_answer"?: number;
+    }
+  ]
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### Step 2
+Update the "Home" component page to show your json file at Quiz selection:
+```typescript
+  const quizList: QuizListItemType[] = [
+    {
+      quiz_file_name: "sample-quiz-1",
+      quiz_display_name: "Sample 1"
+    },
+    {
+      quiz_file_name: "sample-quiz-2",
+      quiz_display_name: "Sample 2"
+    }, 
+    {
+      quiz_file_name: "your-json-file", //the json file name without extension
+      quiz_displa_name: "New Quiz" //a name to show on Home select
+    }
+  ];
+```
