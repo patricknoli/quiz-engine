@@ -50,19 +50,20 @@ const Quiz: React.FC = () => {
           nextQuestion++
         }
       } else if (dependencyQuestion?.question_type == "multiple-choice") {
-        let matchOptions = false;
-        typeof dependencyQuestion.question_dependency_answer == "object" && dependencyQuestion.question_dependency_answer.map((option) => {
+        let matchOptions: boolean = false;
+        typeof nextQuestionObj.question_dependency_answer == "object" && nextQuestionObj.question_dependency_answer.map((option) => {
           if (dependencyQuestionAnswered?.options.find((answer) => answer.answer_id == option.answer_id)) {
             matchOptions = true;
           }
         });
-        matchOptions && nextQuestion++
+        !matchOptions && nextQuestion++
       } else if (dependencyQuestion?.question_type == "input") {
         if (dependencyQuestionAnswered?.answer_text != nextQuestionObj.question_dependency_answer) {
           nextQuestion++;
         }
       }
     }
+    quiz && nextQuestion > quiz.questions.length - 1 && setQuizFinished(true);
     setCurrentQuestion(nextQuestion);
   }
 
@@ -78,12 +79,12 @@ const Quiz: React.FC = () => {
         }
       } else if (dependencyQuestion?.question_type == "multiple-choice") {
         let matchOptions = false;
-        typeof dependencyQuestion.question_dependency_answer == "object" && dependencyQuestion.question_dependency_answer.map((option) => {
+        typeof prevQuestionObj.question_dependency_answer == "object" && prevQuestionObj.question_dependency_answer.map((option) => {
           if (dependencyQuestionAnswered?.options.find((answer) => answer.answer_id == option.answer_id)) {
             matchOptions = true;
           }
         });
-        matchOptions && prevQuestion++
+        !matchOptions && prevQuestion++
       } else if (dependencyQuestion?.question_type == "input") {
         if (dependencyQuestionAnswered?.answer_text != prevQuestionObj.question_dependency_answer) {
           prevQuestion--;

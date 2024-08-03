@@ -33,7 +33,7 @@ const FinishedQuiz: React.FC<FinishedQuizProps> = ({ answeredQuestions, question
 
         <div className="questions-list">
           {answeredQuestions.filter((question) => question.answer_text || question.options.length > 0).map((question) => (
-            <div className="question">
+            <div key={question.question_id} className="question">
               <h4>{questions.find((item) => question.question_id == item.question_id)?.question_text}</h4>
               <div className="answer">
                 {filteredQuestions.find((item) => item.question_id == question.question_id)?.answers?.map((answer) => (
