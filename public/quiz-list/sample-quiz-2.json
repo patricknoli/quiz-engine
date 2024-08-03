@@ -1,21 +1,112 @@
 {
   "quiz_name": "Sample 2 (with conditional questions)",
+  "quiz_description": "Conditional questions",
   "questions": [
     {
+      "question_id": 1,
+      "question_title": "A math question!",
+      "question_description": "Are you good at math?",
+      "question_image": "https://picsum.photos/600/200",
       "question_text": "Is 4 a odd number?",
       "question_type": "one-choice",
       "answers": [
         {
-          "answer_text": "Yes",
-          "answer_correct": false
+          "answer_id": 1,
+          "answer_text": "Yes"
         },
         {
-          "answer_text": "No",
-          "answer_correct": true
+          "answer_id": 2,
+          "answer_text": "No"
         },
         {
-          "answer_text": "Maybe",
-          "answer_correct": false
+          "answer_id": 3,
+          "answer_text": "Maybe"
+        }
+      ]
+    },
+    {
+      "question_id": 4,
+      "question_title": "A more complex math question",
+      "question_description": "If you answered the last right you will see this",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "What is 4 x 16?",
+      "question_type": "one-choice",
+      "question_dependency_id": 1,
+      "question_dependency_answer": 2,
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_text": "24"
+        },
+        {
+          "answer_id": 2,
+          "answer_text": "64"
+        },
+        {
+          "answer_id": 3,
+          "answer_text": "50"
+        },
+        {
+          "answer_id": 4,
+          "answer_text": "60"
+        }
+      ]
+    },
+    {
+      "question_id": 2,
+      "question_title": "Tell me about your location",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "What is your city?",
+      "question_type": "input"
+    },
+    {
+      "question_id": 3,
+      "question_title": "Do you like to travel?",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "What countries would you like to go to?",
+      "question_type": "multiple-choice",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_text": "Brazil"
+        },
+        {
+          "answer_id": 2,
+          "answer_text": "Australia"
+        },
+        {
+          "answer_id": 3,
+          "answer_text": "Germany"
+        },
+        {
+          "answer_id": 4,
+          "answer_text": "China"
+        }
+      ]
+    },
+    {
+      "question_id": 5,
+      "question_title": "Interesting choice :)",
+      "question_image": "https://picsum.photos/600/200",
+      "question_text": "Do you like tropical weather?",
+      "question_type": "one-choice",
+      "question_dependency_id": 3,
+      "question_dependency_answer": [
+        {
+          "answer_id": 1
+        },
+        {
+          "answer_id": 2
+        }
+      ],
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_text": "Yes"
+        },
+        {
+          "answer_id": 2,
+          "answer_text": "No"
         }
       ]
     }

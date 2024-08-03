@@ -38,11 +38,55 @@ const Quiz: React.FC = () => {
 
   function handleNextQuestion() {
     let nextQuestion = currentQuestion + 1;
+    let nextQuestionObj = quiz?.questions[nextQuestion];
+    if (nextQuestionObj?.question_dependency_id) {
+      let dependencyQuestion = quiz?.questions.find((question) => question.question_id == nextQuestionObj.question_dependency_id);
+      let dependencyQuestionAnswered = answeredQuestions.find((question) => question.question_id == nextQuestionObj.question_dependency_id);
+      if (dependencyQuestion?.question_type == "one-choice") {
+        if (!dependencyQuestionAnswered?.options.find((option) => option.answer_id == nextQuestionObj.question_dependency_answer)) {
+          nextQuestion++
+        }
+      } else if (dependencyQuestion?.question_type == "multiple-choice") {
+        let matchOptions = false;
+        typeof dependencyQuestion.question_dependency_answer == "object" && dependencyQuestion.question_dependency_answer.map((option) => {
+          if (dependencyQuestionAnswered?.options.find((answer) => answer.answer_id == option.answer_id)) {
+            matchOptions = true;
+          }
+        });
+        matchOptions && nextQuestion++
+      } else if (dependencyQuestion?.question_type == "input") {
+        if (dependencyQuestionAnswered?.answer_text != nextQuestionObj.question_dependency_answer) {
+          nextQuestion++;
+        }
+      }
+    }
     setCurrentQuestion(nextQuestion);
   }
 
   function handlePreviousQuestion() {
     let prevQuestion = currentQuestion - 1;
+    let prevQuestionObj = quiz?.questions[prevQuestion];
+    if (prevQuestionObj?.question_dependency_id) {
+      let dependencyQuestion = quiz?.questions.find((question) => question.question_id == prevQuestionObj.question_dependency_id);
+      let dependencyQuestionAnswered = answeredQuestions.find((question) => question.question_id == prevQuestionObj.question_dependency_id);
+      if (dependencyQuestion?.question_type == "one-choice") {
+        if (!dependencyQuestionAnswered?.options.find((option) => option.answer_id == prevQuestionObj.question_dependency_answer)) {
+          prevQuestion--
+        }
+      } else if (dependencyQuestion?.question_type == "multiple-choice") {
+        let matchOptions = false;
+        typeof dependencyQuestion.question_dependency_answer == "object" && dependencyQuestion.question_dependency_answer.map((option) => {
+          if (dependencyQuestionAnswered?.options.find((answer) => answer.answer_id == option.answer_id)) {
+            matchOptions = true;
+          }
+        });
+        matchOptions && prevQuestion++
+      } else if (dependencyQuestion?.question_type == "input") {
+        if (dependencyQuestionAnswered?.answer_text != prevQuestionObj.question_dependency_answer) {
+          prevQuestion--;
+        }
+      }
+    }
     setCurrentQuestion(prevQuestion);
   }
 

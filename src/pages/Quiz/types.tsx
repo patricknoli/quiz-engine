@@ -13,7 +13,7 @@ export type QuestionType = {
   question_type: "one-choice" | "multiple-choice" | "input";
   answers?: AnswerType[];
   question_dependency_id?: number;
-  question_dependency_answer?: number;
+  question_dependency_answer?: number | [{ answer_id: number }] | string;
 }
 
 export type AnswerType = {
