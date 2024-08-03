@@ -64,7 +64,7 @@ Add your own json file at /public/quiz-list/ directory following this type defin
         "answer_text": string;
       ];
       "question_dependency_id"?: number;
-      "question_dependency_answer"?: number;
+      "question_dependency_answer"?: number | [{ answer_id: number }] | string;
     }
   ]
 }
