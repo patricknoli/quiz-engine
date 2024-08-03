@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { AnsweredQuestionType, QuestionType, QuizType } from "./types";
 import { Option, QuestionBox, QuizContainer } from "./styles";
 import Progress from "../../components/Quiz/Progress";
+import FinishedQuiz from "../../components/Quiz/FinishedQuiz";
 
 const Quiz: React.FC = () => {
   const { id } = useParams();
@@ -188,6 +189,10 @@ const Quiz: React.FC = () => {
                 )}
               </div>
             </>
+          )}
+
+          {quizStarted && quizFinished && (
+            <FinishedQuiz answeredQuestions={answeredQuestions} questions={quiz.questions} />
           )}
         </>
       )}
