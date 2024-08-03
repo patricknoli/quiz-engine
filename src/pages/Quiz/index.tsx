@@ -84,7 +84,7 @@ const Quiz: React.FC = () => {
             matchOptions = true;
           }
         });
-        !matchOptions && prevQuestion++
+        !matchOptions && prevQuestion--
       } else if (dependencyQuestion?.question_type == "input") {
         if (dependencyQuestionAnswered?.answer_text != prevQuestionObj.question_dependency_answer) {
           prevQuestion--;
