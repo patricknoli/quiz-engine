@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { AnsweredQuestionType, QuestionType, QuizType } from "./types";
 import { Option, QuestionBox, QuizContainer } from "./styles";
+import Progress from "../../components/Quiz/Progress";
 
 const Quiz: React.FC = () => {
   const { id } = useParams();
   const [quiz, setQuiz] = useState<QuizType | null>(null);
   const [quizStarted, setQuizStarted] = useState<boolean>(false);
+  const [quizFinished, setQuizFinished] = useState<boolean>(false);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [answeredQuestions, setAnsweredQuestions] = useState<AnsweredQuestionType[]>([]);
 
@@ -135,52 +137,57 @@ const Quiz: React.FC = () => {
             </>
           )}
 
-          {quizStarted && quiz?.questions.map((question, index) => (
-            <div className={`question-wrapper ${currentQuestion == index ? 'current' : ''}`} key={question.question_id}>
-              <h2>{question.question_title}</h2>
-              <p>{question.question_description}</p>
+          {quizStarted && !quizFinished && (
+            <>
+              <Progress questions={quiz.questions.length} currentQuestion={currentQuestion + 1} />
 
-              <QuestionBox>
-                {question.question_image && (
-                  <img className="question-image" src={question.question_image} alt="" />
-                )}
+              {quiz?.questions.map((question, index) => (
+                <div className={`question-wrapper ${currentQuestion == index ? 'current' : ''}`} key={question.question_id}>
+                  <h2>{question.question_title}</h2>
+                  <p>{question.question_description}</p>
 
-                <div className="question-content">
-                  <h3>{question.question_text}</h3>
+                  <QuestionBox>
+                    {question.question_image && (
+                      <img className="question-image" src={question.question_image} alt="" />
+                    )}
 
-                  {question.question_type == "multiple-choice" && (
-                    <span className="tip">*Select one or more options</span>
-                  )}
-                  {question.question_type !== "input" ? (
-                    <div className="options-list">
-                      {question.answers?.map((answer) => (
-                        <Option className={`${verifySelectedAnswer(answer.answer_id, question.question_id) ? 'selected' : ''}`}
-                          key={answer.answer_id}
-                          onClick={() => handleQuestionAnswer(question.question_id, answer.answer_id)}>
-                          {answer.answer_text}
-                        </Option>
-                      ))}
+                    <div className="question-content">
+                      <h3>{question.question_text}</h3>
+
+                      {question.question_type == "multiple-choice" && (
+                        <span className="tip">*Select one or more options</span>
+                      )}
+                      {question.question_type !== "input" ? (
+                        <div className="options-list">
+                          {question.answers?.map((answer) => (
+                            <Option className={`${verifySelectedAnswer(answer.answer_id, question.question_id) ? 'selected' : ''}`}
+                              key={answer.answer_id}
+                              onClick={() => handleQuestionAnswer(question.question_id, answer.answer_id)}>
+                              {answer.answer_text}
+                            </Option>
+                          ))}
+                        </div>
+                      ) : (
+                        <input type="text" placeholder="Type your answer"
+                          onChange={(e) => handleQuestionAnswer(question.question_id, undefined, e.target.value)} />
+                      )}
                     </div>
-                  ) : (
-                    <input type="text" placeholder="Type your answer"
-                      onChange={(e) => handleQuestionAnswer(question.question_id, undefined, e.target.value)} />
-                  )}
+                  </QuestionBox>
                 </div>
-              </QuestionBox>
-            </div>
-          ))}
-          {quizStarted && (
-            <div className="action">
-              {currentQuestion >= 1 && (
-                <button onClick={() => handlePreviousQuestion()}>previous</button>
-              )}
-              {(currentQuestion + 1) < quiz?.questions.length && (
-                <button onClick={() => handleNextQuestion()}>next</button>
-              )}
-              {(currentQuestion + 1) == quiz?.questions.length && (
-                <button>finish</button>
-              )}
-            </div>
+              ))}
+
+              <div className="action">
+                {currentQuestion >= 1 && (
+                  <button onClick={() => handlePreviousQuestion()}>previous</button>
+                )}
+                {(currentQuestion + 1) < quiz?.questions.length && (
+                  <button onClick={() => handleNextQuestion()}>next</button>
+                )}
+                {(currentQuestion + 1) == quiz?.questions.length && (
+                  <button onClick={() => setQuizFinished(true)}>finish</button>
+                )}
+              </div>
+            </>
           )}
         </>
       )}
