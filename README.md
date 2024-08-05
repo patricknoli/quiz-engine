@@ -1,6 +1,7 @@
 # React Quiz Engine
 
-This application is a simple Quiz Engine built with React and Typescript
+This application is a simple Quiz Engine built with React and Typescript.
+Read more about stack specifications and decisions [here](/docs/SPECIFICATIONS.MD)
 
 Author: Patrick Nicacio de Oliveira
 
